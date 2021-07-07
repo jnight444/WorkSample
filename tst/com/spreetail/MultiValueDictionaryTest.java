@@ -275,7 +275,7 @@ class MultiValueDictionaryTest<K, V> {
         dictionary.add(k1, v1);
         dictionary.add(k2, v2);
 
-        final Map<K, List<V>> expectedItems = new HashMap<>() {{
+        final Map<K, List<V>> expectedItems = new HashMap<K, List<V>>() {{
             put(k1, Collections.singletonList(v1));
             put(k2, Collections.singletonList(v2));
         }};
