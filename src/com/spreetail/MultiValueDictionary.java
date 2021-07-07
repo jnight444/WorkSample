@@ -165,6 +165,20 @@ class MultiValueDictionary<K, V> {
         return entries;
     }
 
+    MultiValueDictionary<K, V> intersection(final MultiValueDictionary<K, V> dictionary) throws DictionaryException {
+        final MultiValueDictionary<K, V> newDictionary = new MultiValueDictionary<>();
+
+        for (final K key : dictionary.keys()) {
+            for (final V member : entries.get(key)) {
+                if (memberExists(key, member)) {
+                    newDictionary.add(key, member);
+                }
+            }
+        }
+
+        return newDictionary;
+    }
+
     /**
      * Validates the given key by checking if it is null.
      * @param k key to be validated.

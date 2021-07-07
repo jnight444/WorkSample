@@ -288,6 +288,25 @@ class MultiValueDictionaryTest<K, V> {
         assertTrue(new MultiValueDictionary<>().items().isEmpty());
     }
 
+    @Test
+    void testIntersect() throws DictionaryException {
+        final MultiValueDictionary<String, String> dictionary1 = new MultiValueDictionary<>();
+        final MultiValueDictionary<String, String> dictionary2 = new MultiValueDictionary<>();
+
+        final MultiValueDictionary<String, String> expectedDictionary = new MultiValueDictionary<>();
+
+        dictionary1.add(KEY1, MEMBER1);
+        dictionary1.add(KEY2, MEMBER2);
+        dictionary2.add(KEY1, MEMBER1);
+
+        expectedDictionary.add(KEY1, MEMBER1);
+
+        MultiValueDictionary<String, String> intersection = dictionary1.intersection(dictionary2);
+
+        assertEquals(expectedDictionary.keys(), intersection.keys());
+        assertEquals(expectedDictionary.members(KEY1), intersection.members(KEY1));
+    }
+
     private static Stream<Arguments> singleKeyParameters() {
         return Stream.of(
                 Arguments.of(KEY1),
